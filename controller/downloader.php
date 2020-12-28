@@ -1,7 +1,8 @@
 <?php
     // die(var_dump($_POST));
-    header('Content-Type : application/octet-stream');
-    header('Content-Transfer-Encoding : Binary');
+    set_time_limit(0);
+    header('Content-Type: application/force-download');
+    header('Content-Transfer-Encoding: Binary');
     
     
     if($_SERVER['HTTP_REFERER'] === $_SERVER['HTTP_ORIGIN'] . '/csv.php'){
