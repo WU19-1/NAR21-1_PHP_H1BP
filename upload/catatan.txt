@@ -1,0 +1,191 @@
+Wahyu
+WU19-1
+Aviel Leonardo Wijaya
+AL19-1
+
+FLSM
+
+VLSM
+
+FLSM -> Fixed Length Subnet Mask
+Classful Subnetting
+
+Ip Address itu memiliki 5 class
+Class A
+1.0.0.0 - 127.255.255.255
+Class B
+128.0.0.0 - 191.255.255.255
+Class C
+192.0.0.0 - 223.255.255.255
+Class D
+224.0.0.0 - 239.255.255.255
+Class E
+240.0.0.0 - 255.255.255.255
+
+A B C -> Ip Addressing biasa -> unicast
+D -> multicast
+1 -> mengirim ke sebuah ip yang mengidentifikasi beberapa ip sebagai sebuah grup
+E -> Restricted / Experimental 
+	-> Hanya bisa untuk private ip address
+
+Network ID -> Sebuah IP yang menunjukan kalau sebuah ip address itu berada di dalam jaringannya
+Broadcast ID -> Sebuah ip yang digunakan untuk mengirim pesan ke semua host / device yang berada di dalam jaringan
+Ip address di dalam sebuah jaringan
+
+Fixed -> dalam sebuah network, semua sub net nya (sub jaringan) itu memiliki jumlah host yang sama.
+
+Sub net
+Sebuah jaringan yang ada di dalam sebuah jaringan
+
+192.168.1.0 -> Class C
+256 - 2 hosts / device = 254
+192.168.1.0 - 192.168.1.15 -> jarigan pertama
+-> Network Admin
+192.168.1.16 - 192.168.1.31 -> jarigan kedua
+-> Operational Staff
+.....
+
+3 main reason
+1. Manageable
+2. Performance
+3. Security
+
+FLSM
+Class A - 255.0.0.0
+1.0.0.0 - 127.255.255.255
+Class B - 255.255.0.0
+128.0.0.0 - 191.255.255.255
+Class C - 255.255.255.0
+192.0.0.0 - 223.255.255.255
+
+Subnetmask 
+255 -> Network ID -> Penentu dia berada di jaringan mana
+0 -> Host id -> dimana kita bisa menggunakan ip address untuk sebuah host / device
+
+192.168.1.2 - Class C - 255.255.255.0
+
+11000000 10101000 00000001 00000010
+11111111 11111111 11111111 00000000
+===================================== AND
+11000000 10101000 00000001 00000000
+
+192.168.1.0 -> Network ID nya
+
+192.168.1.192 - Class C - 255.255.255.0
+
+11000000 10101000 00000001 11000000
+11111111 11111111 11111111 00000000
+===================================== AND
+11000000 10101000 00000001 00000000
+
+192.168.1.0 -> Network ID nya
+
+2 sub network
+NA -> 25 ip address
+Operational 67 ip address
+
+1. kita cek dulu mana subnetwork yang membutuhkan paling banyak ip address
+67 ip address paling banyak
+
+2. Kita tentukan subnetmask nya terlebih dahulu
+2^n -> n = 2
+2^2 = 4 - 2 = 2
+2^3 = 8 - 2 = 6
+2^4 = 16 - 2 = 14
+2^5 = 32 - 2 = 30
+2^6 = 64 - 2 = 62
+2^7 = 128 - 2 = 126 hosts / device
+
+Network ID
+Broadcast ID
+
+n = 7
+
+kita tentukan subnet mask dengan cara
+
+32 - 24 - 7 = 32 - 31 = 1
+hasil 1 = jumlah angka 1 untuk subnet mask bagian host
+255.255.255.0 -> Subnet mask nya class C
+11111111 11111111 11111111 10000000
+255.255.255.128 -> Subnet mask yang baru
+
+3. Tentukan ip range untuk setiap sub net
+Range 1 -> NA
+192.168.1.0 - 192.168.1.127 -> 128 ip address
+Dimana ip address yang bisa digunakan
+192.168.1.1 - 192.168.1.126
+Range 2 -> Operational
+192.168.1.128 - 192.168.1.255 -> 128 ip address
+Dimana ip address yang bisa digunakan
+192.168.1.129 - 192.168.1.254 
+
+192.168.1.2
+11000000 10101000 00000001 00000010
+11111111 11111111 11111111 10000000
+===================================== AND
+11000000 10101000 00000001 00000000
+
+192.168.1.0
+
+192.168.1.192
+11000000 10101000 00000001 11000000
+11111111 11111111 11111111 10000000
+===================================== AND
+11000000 10101000 00000001 10000000
+
+192.168.1.128
+
+Static Ip Addressing
+
+Social Engineering
+Link -> disebarluaskan tapi dituju untuk seorang target
+
+VLSM -> Variable Length Subnet Mask
+Classless Subnetting
+Setiap sub net / sub jaringan didalam bisa memiliki subnet MASK yang berbeda
+
+Dikarenakan Classful Subnetting itu menghabiskan ip yang tidak digunakan
+
+The given Network Address = 200.199.1.0/24
+-	Operational Division have 20 hosts
+-	Academic Division have 50 hosts
+-	Registration Division 15 hosts
+
+
+Academic Division 50
+2^6 = 64 - 2 = 62
+32 - 24 - 6 = 2
+11111111 11111111 11111111 11000000
+255.255.255.192
+
+1   1000000
+128 64 = 192
+Operational Division 20
+2^5 = 32 - 2 = 30
+32 - 24 - 5 = 3
+11111111 11111111 11111111 11100000
+255.255.255.224
+
+11100000
+128 + 64 + 32 = 224
+
+Registration Division 15
+2^5 = 32 - 2 = 30
+32 - 24 - 5 = 3
+255.255.255.224
+
+200.199.1.0
+Academic
+	200.199.1.0 - 200.199.1.63
+	Usable Ip Address
+	200.199.1.1 - 200.199.1.62
+Operational 
+	200.199.1.64 - 200.199.1.95
+	Usable Ip Address
+	200.199.1.65 - 200.199.1.94
+Registration
+	200.199.1.96 - 200.199.1.127
+	Usable Ip Address
+	200.199.1.97 - 200.199.1.126
+
+
